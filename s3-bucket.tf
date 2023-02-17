@@ -1,12 +1,11 @@
-module "s3_bucket_for_logs" {
+module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "my-s3-bucket-for-logs"
-  acl    = "log-delivery-write"
+  bucket = "my-s3-bucket"
+  acl    = "private"
 
-  # Allow deletion of non-empty bucket
-  force_destroy = true
+  versioning = {
+    enabled = true
+  }
 
-  attach_elb_log_delivery_policy = true  # Required for ALB logs
-  attach_lb_log_delivery_policy  = true  # Required for ALB/NLB logs
 }
